@@ -2,7 +2,7 @@
 
 ## Установка
 
-Кликните Download ZIP:
+Вверху страницы найдите кнопку Code, кликните по ней, затем нажмите Download ZIP:
 ![Untitled](https://github.com/PracticumGrade/telegram-bot-1/assets/13587415/4a427987-b925-4f58-b955-bac1398abdc9)
 и распакуйте архив.
 
