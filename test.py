@@ -1,10 +1,14 @@
+from unittest.mock import patch
+
 try:
     import telegram
+    from telegram import Bot
 except ImportError:
     raise AssertionError('Модуль telegram не установлен. Посмотрите в README, что нужно для этого сделать.')
 
 try:
-    import main
+    with patch.object(Bot, 'send_message'):
+        import main
 except telegram.error.InvalidToken:
     raise AssertionError('Убедитесь, что токен для класса Bot передан валидный.')
 
@@ -37,9 +41,23 @@ def test_text():
         raise AssertionError('Убедитесь, что текст сообщения назван, как text')
 
 
+def test_send_message():
+    with patch.object(Bot, 'send_message'):
+        from importlib import reload
+        reload(main)
+        try:
+            main.bot.send_message.assert_called_once_with(
+                main.chat_id,
+                main.text,
+            )
+        except AssertionError:
+            raise AssertionError('Для отправки сообщения нужно вызвать send_message с аргументами chat_id и text.')
+
+
 if __name__ == '__main__':
     test_import()
     test_bot()
     test_chat_id()
     test_text()
+    test_send_message()
     print("Все тесты прошли успешно.")
