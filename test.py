@@ -12,7 +12,7 @@ except telegram.error.InvalidToken:
 def test_import():
     try:
         main.Bot
-    except ImportError:
+    except AttributeError:
         raise AssertionError('Импортируйте класс Bot из модуля telegram.')
 
 
